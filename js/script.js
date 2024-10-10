@@ -58,7 +58,7 @@ function operate() {
     case "÷":
       divide();
       break;
-    case "exp":
+    case "EXP":
       exp();
       break;
     default:
