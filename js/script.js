@@ -3,6 +3,7 @@ const buttonContainer = document.querySelector(".button-container");
 let firstNum = 0;
 let secondNum = 0;
 let operator = "";
+let result = 0;
 
 buttonContainer.addEventListener("click", (event) => {
   let targetClassList = Array.from(event.target.classList);
@@ -22,11 +23,11 @@ buttonContainer.addEventListener("click", (event) => {
 
 function getNumber() {
   if (operator) {
-    secondNum = display.textContent;
+    secondNum = Number(display.textContent);
     console.log("2nd=" + secondNum);
     return;
   }
-  firstNum = display.textContent;
+  firstNum = Number(display.textContent);
   console.log("1st=" + firstNum)
 }
 
@@ -40,5 +41,46 @@ function clearDisplay() {
 }
 
 function operate() {
-  console.log("operate");
+  if (!secondNum) {
+    return;
+  }
+
+  switch (operator) {
+    case "+":
+      add();
+      break;
+    case "-":
+      subtract();
+      break;
+    case "×":
+      multiply();
+      break;
+    case "÷":
+      divide();
+      break;
+    case "exp":
+      exp();
+      break;
+    default:
+      console.log("Something went wrong XD")
+  }
+  display.textContent = result;
+  firstNum = result;
+  secondNum = 0;
+}
+
+function add() {
+  result = firstNum + secondNum;
+}
+function subtract() {
+  result = firstNum - secondNum;
+}
+function multiply() {
+  result = firstNum * secondNum;
+}
+function divide() {
+  result = firstNum / secondNum;
+}
+function exp() {
+  result = firstNum ** secondNum;
 }
