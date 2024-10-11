@@ -26,6 +26,7 @@ body {
 .display-container {
   border: 2px solid green;
   height: 10%;
+  width: 45%;
 }
 
 .button-container {
@@ -33,6 +34,7 @@ body {
   flex-wrap: wrap;
   border: 2px solid red;
   height: 45%;
+  width: 45%;
 }
 
 button {

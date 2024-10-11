@@ -1,5 +1,6 @@
 const display = document.querySelector(".display");
 const buttonContainer = document.querySelector(".button-container");
+const allClear = document.querySelector(".ac")
 let firstNum = 0;
 let secondNum = 0;
 let operator = "";
@@ -15,12 +16,23 @@ buttonContainer.addEventListener("click", (event) => {
     getNumber();
   } else if (targetClassList.includes("operator")) {
     display.textContent = event.target.textContent;
+    if (secondNum) {
+      operate(); //if secondNum is already present, 
+      //first operate the previous numbers then get new operator
+    }
     getOperator(event);
   } else if (targetClassList.includes("equal")) {
     operate();
   }
 })
 
+allClear.addEventListener("click", () => {
+  clearDisplay();
+  firstNum = 0;
+  secondNum = 0;
+  operator = "";
+  result = 0;
+})
 function getNumber() {
   if (operator) {
     secondNum = Number(display.textContent);
