@@ -104,6 +104,7 @@ function allClear() {
   secondNum = 0;
   operator = "";
   result = 0;
+  decimalPresent = false;
 }
 
 function allowDecimal() {
