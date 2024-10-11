@@ -43,7 +43,7 @@ buttonContainer.addEventListener("click", (event) => {
       display.textContent = operator;
       return;
     }
-    display.textContent = `-${display.textContent}`;
+    display.textContent = `-${display.textContent}`.slice(0, -3);
     getNumber()
   }
 })
