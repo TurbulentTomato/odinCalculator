@@ -90,7 +90,8 @@ button {
 .ac:active,
 .del:active,
 .equal:active,
-.decimal:active {
+.decimal:active,
+.negative:active {
   background-color: #dccfbf;
 }
 
