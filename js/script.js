@@ -75,6 +75,7 @@ function operate() {
     default:
       console.log("Something went wrong XD")
   }
+  result = Math.floor(result * 100) / 100;
   display.textContent = result;
   firstNum = result;
   secondNum = 0;
