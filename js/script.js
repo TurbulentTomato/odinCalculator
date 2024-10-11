@@ -8,6 +8,10 @@ let result = null;
 
 buttonContainer.addEventListener("click", (event) => {
   let targetClassList = Array.from(event.target.classList);
+  if (targetClassList.includes("ans")) {
+    alert("This button is non functional");
+    return;
+  }
   if (operator && secondNum === null) {
     if (targetClassList.includes("equal")) {
       return; /*otherwise if you press equal 
