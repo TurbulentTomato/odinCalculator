@@ -100,6 +100,10 @@ function operate() {
     default:
       console.log("Something went wrong XD")
   }
+  if (result == null) {
+    allClear();
+    return;
+  }
   result = Math.floor(result * 100) / 100;
   display.textContent = result;
   history.textContent = `${firstNum} ${operator} ${secondNum}`
@@ -120,6 +124,10 @@ function multiply() {
   result = firstNum * secondNum;
 }
 function divide() {
+  if (secondNum === 0) {
+    alert("Division by 0 not defined!!!");
+    return;
+  }
   result = firstNum / secondNum;
 }
 function exp() {
@@ -134,6 +142,7 @@ function allClear() {
   prevOperator = null;
   result = null;
   decimalPresent = false;
+  history.textContent = "";
 }
 
 function allowDecimal() {
