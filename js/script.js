@@ -8,7 +8,7 @@ let result = null;
 
 buttonContainer.addEventListener("click", (event) => {
   let targetClassList = Array.from(event.target.classList);
-  if (operator && !secondNum) {
+  if (operator && secondNum === null) {
     if (targetClassList.includes("equal")) {
       return; /*otherwise if you press equal 
       after entering operator and before entering secondNum 
@@ -137,6 +137,9 @@ function backspace() {
     display.textContent = "";
     return;
   }
-  display.textContent = display.textContent.slice(0, display.textContent.indexOf("D") - 1)
+  display.textContent = display.textContent.slice(0, display.textContent.indexOf("D") - 1);
   getNumber();
+  if (decimalPresent && display.textContent.indexOf(".") === -1) {
+    decimalPresent = false;
+  }
 }
