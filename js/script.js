@@ -10,10 +10,7 @@ const history = document.querySelector(".history")
 
 buttonContainer.addEventListener("click", (event) => {
   let targetClassList = Array.from(event.target.classList);
-  if (targetClassList.includes("ans")) {
-    alert("This button is non functional");
-    return;
-  }
+
   if (operator && secondNum === null) {
     if (targetClassList.includes("equal")) {
       return; /*otherwise if you press equal 
@@ -41,6 +38,13 @@ buttonContainer.addEventListener("click", (event) => {
     allowDecimal();
   } else if (targetClassList.includes("del")) {
     backspace();
+  } else if (targetClassList.includes("negative")) {
+    if (operator && secondNum === null) {
+      display.textContent = operator;
+      return;
+    }
+    display.textContent = `-${display.textContent}`;
+    getNumber()
   }
 })
 
@@ -106,7 +110,7 @@ function operate() {
   }
   result = Math.floor(result * 100) / 100;
   display.textContent = result;
-  history.textContent = `${firstNum} ${operator} ${secondNum}`
+  history.textContent = `(${firstNum}) ${operator} (${secondNum})`;
   firstNum = result;
   secondNum = null;
   operator = "";
