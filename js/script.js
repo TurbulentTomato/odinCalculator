@@ -33,6 +33,8 @@ buttonContainer.addEventListener("click", (event) => {
     allClear();
   } else if (targetClassList.includes("decimal")) {
     allowDecimal();
+  } else if (targetClassList.includes("del")) {
+    backspace();
   }
 })
 
@@ -126,4 +128,15 @@ function allowDecimal() {
   getNumber();
   decimalPresent = true;
   return;
+}
+
+function backspace() {
+  console.log("back");
+  if (operator && secondNum === null) {
+    operator = "";
+    display.textContent = "";
+    return;
+  }
+  display.textContent = display.textContent.slice(0, display.textContent.indexOf("D") - 1)
+  getNumber();
 }
