@@ -1,6 +1,6 @@
 const display = document.querySelector(".display");
 const buttonContainer = document.querySelector(".button-container");
-const allClear = document.querySelector(".ac")
+
 let firstNum = 0;
 let secondNum = 0;
 let operator = "";
@@ -23,16 +23,12 @@ buttonContainer.addEventListener("click", (event) => {
     getOperator(event);
   } else if (targetClassList.includes("equal")) {
     operate();
+  } else if (targetClassList.includes("ac")) {
+    allClear();
   }
 })
 
-allClear.addEventListener("click", () => {
-  clearDisplay();
-  firstNum = 0;
-  secondNum = 0;
-  operator = "";
-  result = 0;
-})
+
 function getNumber() {
   if (operator) {
     secondNum = Number(display.textContent);
@@ -54,7 +50,7 @@ function clearDisplay() {
 
 function operate() {
   if (!secondNum) {
-    return;
+    retrn;
   }
 
   switch (operator) {
@@ -95,4 +91,12 @@ function divide() {
 }
 function exp() {
   result = firstNum ** secondNum;
+}
+
+function allClear() {
+  clearDisplay();
+  firstNum = 0;
+  secondNum = 0;
+  operator = "";
+  result = 0;
 }
