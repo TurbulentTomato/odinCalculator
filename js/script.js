@@ -6,6 +6,7 @@ let secondNum = null;
 let operator = "";
 let result = null;
 let prevOperator = null;//stores previous operator, see use in backspace()
+const history = document.querySelector(".history")
 
 buttonContainer.addEventListener("click", (event) => {
   let targetClassList = Array.from(event.target.classList);
@@ -101,6 +102,7 @@ function operate() {
   }
   result = Math.floor(result * 100) / 100;
   display.textContent = result;
+  history.textContent = `${firstNum} ${operator} ${secondNum}`
   firstNum = result;
   secondNum = null;
   operator = "";
