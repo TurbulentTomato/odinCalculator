@@ -44,6 +44,26 @@ button {
   flex: 1 1 20%;
   background-color: #dccfbf;
   border: 2px solid #494136;
+  font-weight: bold;
+  color: #494136;
+}
+
+.operator,
+.ac,
+.del,
+.equal,
+.decimal,
+.ans {
+  background-color: #F0A160;
+}
+
+
+.operator:active,
+.ac:active,
+.del:active,
+.equal:active,
+.decimal:active {
+  background-color: #dccfbf;
 }
 
 .footer {

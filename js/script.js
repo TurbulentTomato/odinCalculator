@@ -5,6 +5,7 @@ let firstNum = null;
 let secondNum = null;
 let operator = "";
 let result = null;
+let prevOperator = null;//stores previous operator, see use in backspace()
 
 buttonContainer.addEventListener("click", (event) => {
   let targetClassList = Array.from(event.target.classList);
@@ -45,6 +46,11 @@ buttonContainer.addEventListener("click", (event) => {
 
 function getNumber() {
   if (operator) {
+    prevOperator = operator;
+    if (display.textContent === "") {
+      secondNum = null;
+      return;
+    }
     secondNum = Number(display.textContent);
     console.log("2nd=" + secondNum);
     return;
@@ -59,6 +65,7 @@ function getOperator(event) {
     return;
   }
   operator = event.target.textContent;
+  prevOperator = null;
   decimalPresent = false;
   console.log(operator)
 }
@@ -96,6 +103,8 @@ function operate() {
   display.textContent = result;
   firstNum = result;
   secondNum = null;
+  operator = "";
+  prevOperator = null;
   decimalPresent = false;
 }
 
@@ -120,6 +129,7 @@ function allClear() {
   firstNum = null;
   secondNum = null;
   operator = "";
+  prevOperator = null;
   result = null;
   decimalPresent = false;
 }
@@ -136,11 +146,32 @@ function allowDecimal() {
 
 function backspace() {
   console.log("back");
-  if (operator && secondNum === null) {
+  if (operator && secondNum === null && prevOperator === null) {
+    prevOperator = operator; //the value of prev operatoris now truthy so it will enter next if block if other conditions are satisfied
     operator = "";
+    display.textContent = operator;
+    return;
+  }
+
+  /*actually these two if blocks were conflicting. Either
+    the operator wont show when using backspace
+    or it will keep showing and backspace wouldnt shift to firstNum*/
+  if (display.textContent === "DEL") {
+    if (!operator && firstNum) {
+      console.log("exr " + firstNum)
+      display.textContent = firstNum;
+      return
+    } else if (!secondNum && operator && prevOperator) {
+      prevOperator = null;
+      display.textContent = operator;
+      console.log("ho " + secondNum)
+      return
+    }
+    console.log("nos")
     display.textContent = "";
     return;
   }
+
   display.textContent = display.textContent.slice(0, display.textContent.indexOf("D") - 1);
   getNumber();
   if (decimalPresent && display.textContent.indexOf(".") === -1) {
