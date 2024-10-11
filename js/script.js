@@ -9,6 +9,12 @@ let result = 0;
 buttonContainer.addEventListener("click", (event) => {
   let targetClassList = Array.from(event.target.classList);
   if (operator && !secondNum) {
+    if (targetClassList.includes("equal")) {
+      return; /*otherwise if you press equal 
+      after entering operator and before entering secondNum 
+      then it will clear the display. Does not cause any bug but
+      removes the operator from display which just doesn't seem right.*/
+    }
     clearDisplay();
   }
   display.textContent += event.target.textContent;
@@ -53,6 +59,7 @@ function clearDisplay() {
 
 function operate() {
   if (!secondNum) {
+    display.textContent = display.textContent.slice(0, display.textContent.length - 1);
     return;
   }
 
