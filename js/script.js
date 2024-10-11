@@ -1,10 +1,10 @@
 const display = document.querySelector(".display");
 const buttonContainer = document.querySelector(".button-container");
 let decimalPresent = false;
-let firstNum = 0;
-let secondNum = 0;
+let firstNum = null;
+let secondNum = null;
 let operator = "";
-let result = 0;
+let result = null;
 
 buttonContainer.addEventListener("click", (event) => {
   let targetClassList = Array.from(event.target.classList);
@@ -48,6 +48,10 @@ function getNumber() {
 }
 
 function getOperator(event) {
+  if (firstNum === null) {
+    clearDisplay();
+    return;
+  }
   operator = event.target.textContent;
   decimalPresent = false;
   console.log(operator)
@@ -58,7 +62,7 @@ function clearDisplay() {
 }
 
 function operate() {
-  if (!secondNum) {
+  if (secondNum === null) {
     display.textContent = display.textContent.slice(0, display.textContent.length - 1);
     return;
   }
@@ -85,7 +89,7 @@ function operate() {
   result = Math.floor(result * 100) / 100;
   display.textContent = result;
   firstNum = result;
-  secondNum = 0;
+  secondNum = null;
   decimalPresent = false;
 }
 
@@ -107,10 +111,10 @@ function exp() {
 
 function allClear() {
   clearDisplay();
-  firstNum = 0;
-  secondNum = 0;
+  firstNum = null;
+  secondNum = null;
   operator = "";
-  result = 0;
+  result = null;
   decimalPresent = false;
 }
 
