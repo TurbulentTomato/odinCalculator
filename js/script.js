@@ -1,6 +1,6 @@
 const display = document.querySelector(".display");
 const buttonContainer = document.querySelector(".button-container");
-
+let decimalPresent = false;
 let firstNum = 0;
 let secondNum = 0;
 let operator = "";
@@ -25,6 +25,8 @@ buttonContainer.addEventListener("click", (event) => {
     operate();
   } else if (targetClassList.includes("ac")) {
     allClear();
+  } else if (targetClassList.includes("decimal")) {
+    allowDecimal();
   }
 })
 
@@ -41,6 +43,7 @@ function getNumber() {
 
 function getOperator(event) {
   operator = event.target.textContent;
+  decimalPresent = false;
   console.log(operator)
 }
 
@@ -50,7 +53,7 @@ function clearDisplay() {
 
 function operate() {
   if (!secondNum) {
-    retrn;
+    return;
   }
 
   switch (operator) {
@@ -75,6 +78,7 @@ function operate() {
   display.textContent = result;
   firstNum = result;
   secondNum = 0;
+  decimalPresent = false;
 }
 
 function add() {
@@ -99,4 +103,14 @@ function allClear() {
   secondNum = 0;
   operator = "";
   result = 0;
+}
+
+function allowDecimal() {
+  if (decimalPresent) {
+    display.textContent = display.textContent.slice(0, display.textContent.length - 1);
+    return;
+  }
+  getNumber();
+  decimalPresent = true;
+  return;
 }
