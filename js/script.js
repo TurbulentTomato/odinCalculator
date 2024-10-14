@@ -7,8 +7,20 @@ let operator = "";
 let result = null;
 let prevOperator = null;//stores previous operator, see use in backspace()
 const history = document.querySelector(".history");
+const supportedKeys = ["0123456789", "+-*/^", ".", "C", "Backspace", "Delete", "=", "Enter", "Shift"];
+const keyClasses = ["number", "operator", "decimal", "ac", "del", "del", "equal", "equal", "negative"];
 
-buttonContainer.addEventListener("click", (event) => {
+let customEventObject = {
+  target: {
+    classList: [],
+    textContent: "",
+  },
+}
+
+
+buttonContainer.addEventListener("click", getInputAndProceed)
+
+function getInputAndProceed(event) {
   let targetClassList = Array.from(event.target.classList);
 
   if (operator && secondNum === null) {
@@ -46,7 +58,7 @@ buttonContainer.addEventListener("click", (event) => {
     display.textContent = `-${display.textContent}`.slice(0, -3);
     getNumber()
   }
-})
+}
 
 
 function getNumber() {
@@ -194,3 +206,29 @@ function backspace() {
   }
 }
 
+document.addEventListener("keypress", (event) => {
+  const keyToCheck = supportedKeys.find((key) => {
+    return key.includes(event.key)
+  })
+
+  if (keyToCheck !== undefined) {
+    const eventTargetClass = keyClasses[supportedKeys.indexOf(keyToCheck)];
+    customEventObject.target.classList.push(eventTargetClass);
+    if (event.key === "Backspace" || event.key === "Delete") {
+      customEventObject.target.textContent = "del";
+    } else if (event.key === "Shift") {
+      customEventObject.target.textContent = "+/-";
+    } else if (event.key === "Enter") {
+      customEventObject.target.textContent = "=";
+    } else {
+      customEventObject.target.textContent = event.key
+    }
+    getInputAndProceed(customEventObject);
+    customEventObject = {
+      target: {
+        classList: [],
+        textContent: "",
+      },
+    }
+  }
+})
