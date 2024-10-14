@@ -6,7 +6,7 @@ let secondNum = null;
 let operator = "";
 let result = null;
 let prevOperator = null;//stores previous operator, see use in backspace()
-const history = document.querySelector(".history")
+const history = document.querySelector(".history");
 
 buttonContainer.addEventListener("click", (event) => {
   let targetClassList = Array.from(event.target.classList);
@@ -92,13 +92,13 @@ function operate() {
     case "-":
       subtract();
       break;
-    case "×":
+    case "*":
       multiply();
       break;
-    case "÷":
+    case "/":
       divide();
       break;
-    case "EXP":
+    case "^":
       exp();
       break;
     default:
@@ -193,3 +193,4 @@ function backspace() {
     decimalPresent = false;
   }
 }
+
