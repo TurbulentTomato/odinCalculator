@@ -55,8 +55,8 @@ function getInputAndProceed(event) {
       display.textContent = operator;
       return;
     }
-    display.textContent = `-${display.textContent}`.slice(0, -3);
-    getNumber()
+    display.textContent = `${(secondNum === null) ? -firstNum : -secondNum}`;
+    getNumber();
   }
 }
 
